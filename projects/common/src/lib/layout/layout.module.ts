@@ -16,7 +16,6 @@ import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
-  declarations: [LayoutComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -32,6 +31,12 @@ import {BrowserModule} from '@angular/platform-browser';
     MatMenuModule,
     MatToolbarModule,
     MatBadgeModule
+  ],
+  declarations: [
+    LayoutComponent
+  ],
+  entryComponents: [
+    LayoutComponent
   ]
 })
 export class LayoutModule { }

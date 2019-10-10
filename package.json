@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build common && npm pack",
+    "build": "ng build common && npm pack dist\\common",
     "test": "ng test common",
     "lint": "ng lint common",
     "e2e": "ng e2e common"
