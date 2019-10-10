@@ -1,0 +1,56 @@
+<div class="side-nav" (mouseenter)="expand()" (mouseleave)="collapse()" [class.collapsed]="!(open||pinned)" [class.pinned]="pinned">
+  <div class="logo-container">
+    <img class="logo" src="assets/logo.png">
+    <span class="title" *ngIf="open || pinned">DISCOVERY</span>
+    <button mat-button class="toggle" *ngIf="open || pinned" (click)="togglePin()">
+      <mat-icon>{{pinIcon}}</mat-icon>
+    </button>
+  </div>
+  <div class="nav-user flex-center">
+    <img class="avatar" [src]="avatar">
+    <div class="user-details">
+      <h4>{{user?.firstName}} {{user?.lastName}}</h4>
+      <h5>{{user?.email}}</h5>
+      <div class="actions flex-center">
+        <button mat-button><mat-icon>account_box</mat-icon></button>
+        <button mat-button><mat-icon>settings</mat-icon></button>
+        <button mat-button (click)="logout()"><mat-icon>exit_to_app</mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div class="nav-entries">
+    <button mat-button *ngFor="let item of menuItems" [routerLink]="item.state">
+      <mat-icon>{{item.icon}}</mat-icon><span *ngIf="open || pinned" [matBadge]="item.badge" matBadgePosition="after" matBadgeColor="accent" matBadgeOverlap="false"> {{item.caption}}</span>
+    </button>
+  </div>
+
+</div>
+<div class="nav-content" [class.pinned]="pinned">
+  <div class="layout-header">
+    <mat-toolbar>
+      <span class="title">{{title}}</span>
+      <span class="toolbar-fill"></span>
+      <button mat-button><mat-icon matBadge="13" matBadgePosition="above after" matBadgeColor="accent">format_list_bulleted</mat-icon></button>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <img class="avatar" [src]="avatar">
+      <span class="name">{{user?.firstName}} {{user?.lastName}}</span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item><mat-icon>account_box</mat-icon>Profile</button>
+      <button mat-menu-item [matMenuTriggerFor]="themeMenu"><mat-icon>format_paint</mat-icon>Theme</button>
+      <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
+      <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+    </mat-menu>
+      <mat-menu #themeMenu="matMenu">
+        <button mat-menu-item (click)="onSetTheme('default-theme')">Default</button>
+        <button mat-menu-item (click)="onSetTheme('dark-theme')">Dark</button>
+        <button mat-menu-item (click)="onSetTheme('teal-theme')">Teal</button>
+      </mat-menu>
+
+    </mat-toolbar>
+  </div>
+  <div class="layout-body">
+    <router-outlet></router-outlet>
+  </div>
+</div>
