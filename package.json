@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build common && npm pack dist\\common",
+    "build": "ng build common && npm run copy-assets && npm pack dist\\common",
     "test": "ng test common",
     "lint": "ng lint common",
-    "e2e": "ng e2e common"
+    "e2e": "ng e2e common",
+    "copy-assets": "cpx \"projects/common/assets/**/*\" \"dist/common/assets\""
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,7 @@
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "cpx": "^1.5.0",
     "keycloak-angular": "^7.0.1",
     "keycloak-js": "^4.8.3",
     "rxjs": "~6.4.0",

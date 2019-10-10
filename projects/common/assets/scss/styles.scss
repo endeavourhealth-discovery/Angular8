@@ -1,0 +1,67 @@
+@import "layout-theme";
+
+.logo {
+  content: url('~dds-angular8/assets/img/logo.png');
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+/* Restructure cards to make themable */
+
+.mat-card {
+  padding: 0 !important;
+}
+
+.mat-card-header {
+  padding: 16px 16px 0 16px !important;
+  .mat-icon {
+    font-size: 48px;
+  }
+}
+
+.mat-card-content {
+  padding: 16px;
+}
+
+
+.mat-table-compact.mat-table
+{
+  .mat-header-row,
+  .mat-row {
+    height: 38px;
+  }
+}
+
+.flex {
+  .mat-form-field-wrapper {
+    padding-bottom: 0px;
+  }
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  place-content: center;
+}
+
+.noresize {
+  resize: none !important;
+}
+
