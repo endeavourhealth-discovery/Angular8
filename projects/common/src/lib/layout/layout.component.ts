@@ -4,6 +4,8 @@ import {KeycloakService} from 'keycloak-angular';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {KeycloakProfile} from 'keycloak-js';
 import {MenuOption} from './models/MenuOption';
+import {Router} from '@angular/router';
+import {CanActivateRouteGuard} from '../security/can-activate-route.guard';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +27,13 @@ export class LayoutComponent implements OnInit {
 
   constructor(private menuService: AbstractMenuProvider,
               private keycloak: KeycloakService,
+              private router: Router,
               public overlayContainer: OverlayContainer) { }
 
   ngOnInit() {
     this.menuItems = this.menuService.getMenuOptions();
     this.title = this.menuService.getApplicationTitle();
+    CanActivateRouteGuard.secureRoutes(this.router);
     this.keycloak.loadUserProfile()
       .then(
         (result) => this.user = result,
