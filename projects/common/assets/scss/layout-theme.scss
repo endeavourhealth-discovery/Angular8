@@ -1,8 +1,24 @@
 @import '~@angular/material/theming';
 
+.logger-info {
+  color: white !important;
+  background-color: #1976d2 !important;
+}
+
+.logger-success {
+  color: white !important;
+  background-color: #388e3c !important;
+}
+
+.logger-error {
+  color: white !important;
+  background-color: #d32f2f !important;
+}
+
 @mixin theme-layout($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $background: mat-color($primary, 50);
 
   .layout-header {
     background-color: mat-color($primary, 200);
@@ -37,14 +53,17 @@
     background-color: mat-color($primary, 200);
   }
 
-  .mat-card-content {
-    background-color: mat-color($primary, 50);
+  .mat-card-content,
+  .mat-table,
+  .mat-paginator {
+    background-color: $background;
   }
 }
 
 @mixin theme-layout-dark($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $background: mat-color($primary, 600);
 
   .layout-header {
     background-color: mat-color($primary, 200);
@@ -80,6 +99,12 @@
   }
 
   .mat-card-content {
-    background-color: mat-color($primary, 600);
+    background-color: $background;
+  }
+
+  .mat-card-content,
+  .mat-table,
+  .mat-paginator {
+    background-color: $background;
   }
 }
