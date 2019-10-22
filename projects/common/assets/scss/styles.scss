@@ -4,6 +4,10 @@
   content: url('~dds-angular8/assets/img/logo.png');
 }
 
+.default-avatar {
+  content: url('~dds-angular8/assets/img/avatar.png');
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -65,4 +69,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   resize: none !important;
 }
 
+.mat-menu-panel {
+  max-width: none !important;
+}
 
+.mat-table {
+  margin-right: 16px;
+}

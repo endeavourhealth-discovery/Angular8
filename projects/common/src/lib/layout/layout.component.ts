@@ -1,11 +1,13 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {AbstractMenuProvider} from './menuProvider.service';
-import {KeycloakService} from 'keycloak-angular';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import {KeycloakProfile} from 'keycloak-js';
 import {MenuOption} from './models/MenuOption';
 import {Router} from '@angular/router';
 import {CanActivateRouteGuard} from '../security/can-activate-route.guard';
+import {UserProfile} from '../user-manager/models/UserProfile';
+import {UserProject} from '../user-manager/models/UserProject';
+import {UserManagerService} from '../user-manager/user-manager.service';
+import {LoggerService} from '../logger/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -20,25 +22,50 @@ export class LayoutComponent implements OnInit {
   pinIcon = 'radio_button_unchecked';
 
   title = '';
-  avatar = 'assets/avatar.png';
-  user: KeycloakProfile;
+  user: UserProfile;
+  userProjects: UserProject[];
+  currentProject: UserProject;
 
   menuItems: MenuOption[] = [];
 
   constructor(private menuService: AbstractMenuProvider,
-              private keycloak: KeycloakService,
+              private userManagerService: UserManagerService,
               private router: Router,
-              public overlayContainer: OverlayContainer) { }
+              public overlayContainer: OverlayContainer,
+              private log: LoggerService) {
+  }
 
   ngOnInit() {
     this.menuItems = this.menuService.getMenuOptions();
     this.title = this.menuService.getApplicationTitle();
     CanActivateRouteGuard.secureRoutes(this.router);
-    this.keycloak.loadUserProfile()
+    this.getUserProfile();
+    this.userManagerService.onProjectChange.subscribe(
+      (newProject) => this.onProjectChange(newProject),
+      (error) => this.log.error(error)
+    );
+  }
+
+  onProjectChange(project: UserProject) {
+    this.currentProject = project;
+    this.userManagerService.checkCurrentAccess();
+  }
+
+  getUserProfile() {
+    this.userManagerService.getUserProfile()
       .then(
-        (result) => this.user = result,
-        (error) => console.error(error)
+        (profile) => this.setUserProfile(profile),
+        (error) => this.log.error(error)
       );
+  }
+
+  setUserProfile(profile: UserProfile) {
+    this.user = profile;
+    this.userManagerService.getUserProjects()
+      .then(
+        (projects) => this.userProjects = projects,
+        (error) => this.log.error(error)
+      )
   }
 
   expand() {
@@ -55,11 +82,22 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    this.keycloak.logout();
+    this.userManagerService.logout();
   }
 
   onSetTheme(theme) {
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
+  }
+
+  switchProject(project: UserProject) {
+    this.userManagerService.setSelectedProject(project);
+  }
+
+  setDefault(project: UserProject) {
+    this.userManagerService.changeDefaultProject(project.id, this.userManagerService.getSelectedProject().id).subscribe(
+      (ok) => this.getUserProfile(),
+      (error) => this.log.error(error)
+    );
   }
 }

@@ -10,3 +10,6 @@ export {CanActivateRouteGuard} from './lib/security/can-activate-route.guard'
 
 export {LoggerModule} from './lib/logger/logger.module';
 export {LoggerService} from './lib/logger/logger.service';
+
+export {UserManagerModule} from './lib/user-manager/user-manager.module';
+export {UserManagerService} from './lib/user-manager/user-manager.service';
