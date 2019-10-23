@@ -14,6 +14,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {BrowserModule} from '@angular/platform-browser';
     RouterModule,
     MatMenuModule,
     MatToolbarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     LayoutComponent

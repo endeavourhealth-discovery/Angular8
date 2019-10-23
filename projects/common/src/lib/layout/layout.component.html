@@ -7,7 +7,7 @@
     </button>
   </div>
   <div class="nav-user flex-center">
-    <img class="avatar" [src]="user?.photo">
+    <img class="avatar" [src]="(user?.photo == null) ? 'avatar.png' : user?.photo">
     <div class="user-details">
       <h4>{{user?.forename}} {{user?.surname}}</h4>
       <h5>{{user?.email}}</h5>
@@ -53,7 +53,7 @@
 
 
       <button mat-button [matMenuTriggerFor]="menu">
-        <img class="avatar" [src]="user?.photo">
+        <img class="avatar" [src]="(user?.photo == null) ? 'avatar.png' : user?.photo">
         <span class="name">{{user?.forename}} {{user?.surname}}</span>
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
@@ -73,6 +73,12 @@
     </mat-toolbar>
   </div>
   <div class="layout-body">
-    <router-outlet></router-outlet>
+    <router-outlet>
+      <div *ngIf="user==null" class="flex" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="16px grid" fxLayoutAlign="start">
+        <div class="flex-center" fxFill fxFlex="100">
+          <mat-spinner></mat-spinner>
+        </div>
+      </div>
+    </router-outlet>
   </div>
 </div>

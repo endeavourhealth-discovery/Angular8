@@ -8,7 +8,6 @@ import {KeycloakService} from 'keycloak-angular';
 import {UserOrganisationProject} from './models/UserOrganisationProject';
 import {ApplicationPolicyAttribute} from './models/ApplicationPolicyAttribute';
 import {AbstractMenuProvider} from '../layout/menuProvider.service';
-import {Router} from '@angular/router';
 
 @Injectable()
 export class UserManagerService {
@@ -21,8 +20,7 @@ export class UserManagerService {
 
   constructor(private http: HttpClient,
               private keycloakService: KeycloakService,
-              private menuProvider: AbstractMenuProvider,
-              private router: Router) {
+              private menuProvider: AbstractMenuProvider) {
     this._keycloakUserId = keycloakService.getKeycloakInstance().idTokenParsed.sub;
   }
 
@@ -86,11 +84,10 @@ export class UserManagerService {
         let authorised = false;
         let application = this.menuProvider.getApplicationTitle();
 
-
         this.getUserProfile().then(
-          (ok) => {
+          () => {
             this.getUserProjects().then(
-              (ok) => {
+              () => {
                 let org: UserOrganisationProject = this._userProfile.organisationProjects.find(x => x.organisation.uuid == this._selectedProject.organisationId);
 
                 if (org != null) {

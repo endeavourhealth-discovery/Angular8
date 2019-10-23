@@ -37,11 +37,13 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    CanActivateRouteGuard.secureRoutes(this.router);
+    this.title = this.menuService.getApplicationTitle();
     this.menuItems = this.menuService.getMenuOptions();
     this.setMenuOptionAccess();
-    this.title = this.menuService.getApplicationTitle();
-    CanActivateRouteGuard.secureRoutes(this.router);
+
     this.getUserProfile();
+
     this.userManagerService.onProjectChange.subscribe(
       (newProject) => this.onProjectChange(newProject),
       (error) => this.log.error(error)

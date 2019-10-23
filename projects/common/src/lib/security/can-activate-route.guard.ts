@@ -48,10 +48,6 @@ export class CanActivateRouteGuard extends KeycloakAuthGuard implements CanActiv
     });
   }
 
-  checkCurrentAccess(): Promise<boolean> {
-    return this.checkRoleAccess(this._role);
-  }
-
   checkRoleAccess(role: string): Promise<boolean>  {
     return new Promise((resolve, reject) => {
       this.userManagerService.checkRoleAccess(role).then(
@@ -69,6 +65,10 @@ export class CanActivateRouteGuard extends KeycloakAuthGuard implements CanActiv
         (error) => reject(error)
       )
     });
+  }
+
+  checkCurrentAccess(): Promise<boolean> {
+    return this.checkRoleAccess(this._role);
   }
 }
 
