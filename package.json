@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build common && npm run copy-assets && npm pack dist\\common",
-    "test": "ng test common",
-    "lint": "ng lint common",
-    "e2e": "ng e2e common",
-    "copy-assets": "cpx \"projects/common/assets/**/*\" \"dist/common/assets\""
+    "build": "ng build dds-angular8 && npm run copy-assets && npm pack dist\\dds-angular8",
+    "test": "ng test dds-angular8",
+    "lint": "ng lint dds-angular8",
+    "e2e": "ng e2e dds-angular8",
+    "copy-assets": "cpx \"projects/dds-angular8/assets/**/*\" \"dist/dds-angular8/assets\""
   },
   "private": true,
   "dependencies": {

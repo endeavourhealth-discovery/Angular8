@@ -1,9 +1,10 @@
 /*
- * Public API Surface of common
+ * Public API Surface of dds-angular8
  */
 export {AbstractMenuProvider} from './lib/layout/menuProvider.service';
 export {LayoutModule} from './lib/layout/layout.module';
 export {LayoutComponent} from './lib/layout/layout.component';
+export {MenuOption} from './lib/layout/models/MenuOption';
 
 export {SecurityModule} from './lib/security/security.module';
 export {CanActivateRouteGuard} from './lib/security/can-activate-route.guard'

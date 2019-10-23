@@ -20,10 +20,10 @@
     ],
     "paths": {
       "common": [
-        "dist/common"
+        "./dist/dds-angular8"
       ],
       "common/*": [
-        "dist/common/*"
+        "./dist/dds-angular8/*"
       ]
     }
   },
