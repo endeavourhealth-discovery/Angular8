@@ -16,6 +16,10 @@ export class CanActivateRouteGuard extends KeycloakAuthGuard implements CanActiv
     router.resetConfig(routes);
   }
 
+  private _role: string;
+  private _url: string;
+  private _unauthorised: boolean = false;
+
   constructor(protected router: Router,
               protected keycloakAngular: KeycloakService,
               protected userManagerService: UserManagerService,
@@ -29,10 +33,41 @@ export class CanActivateRouteGuard extends KeycloakAuthGuard implements CanActiv
       if (!this.authenticated) {
         this.keycloakAngular.login()
           .catch(e => this.log.error(e));
-        return reject(false);
+        return reject('Not logged in');
       }
 
-      resolve(this.userManagerService.checkRoleAccess(route.data.role, state.url));
+      if (!state.url.endsWith('unauthorised')) {
+        this._role = route.data.role;
+        this._url = state.url;
+      }
+
+      this.checkRoleAccess(route.data.role).then(
+        (authorised) => resolve(authorised),
+        (error) => reject(error)
+      );
+    });
+  }
+
+  checkCurrentAccess(): Promise<boolean> {
+    return this.checkRoleAccess(this._role);
+  }
+
+  checkRoleAccess(role: string): Promise<boolean>  {
+    return new Promise((resolve, reject) => {
+      this.userManagerService.checkRoleAccess(role).then(
+        (authorised) => {
+          if (!authorised) {
+            this._unauthorised = true;
+            this.router.navigate(['/unauthorised']);
+          } else if (this._unauthorised) {
+            this._unauthorised = false;
+            this.router.navigate([this._url]);
+          }
+
+          resolve(authorised);
+        },
+        (error) => reject(error)
+      )
     });
   }
 }

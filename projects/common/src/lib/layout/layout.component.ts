@@ -2,7 +2,7 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 import {AbstractMenuProvider} from './menuProvider.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {MenuOption} from './models/MenuOption';
-import {Router} from '@angular/router';
+import {Route, Router} from '@angular/router';
 import {CanActivateRouteGuard} from '../security/can-activate-route.guard';
 import {UserProfile} from '../user-manager/models/UserProfile';
 import {UserProject} from '../user-manager/models/UserProject';
@@ -32,11 +32,13 @@ export class LayoutComponent implements OnInit {
               private userManagerService: UserManagerService,
               private router: Router,
               public overlayContainer: OverlayContainer,
+              private routeGuard: CanActivateRouteGuard,
               private log: LoggerService) {
   }
 
   ngOnInit() {
     this.menuItems = this.menuService.getMenuOptions();
+    this.setMenuOptionAccess();
     this.title = this.menuService.getApplicationTitle();
     CanActivateRouteGuard.secureRoutes(this.router);
     this.getUserProfile();
@@ -46,9 +48,21 @@ export class LayoutComponent implements OnInit {
     );
   }
 
+  setMenuOptionAccess() {
+    let routes: Route[] = this.router.config;
+    for (let menuOption of this.menuItems) {
+      let route = routes.find(r => r.path == menuOption.state);
+      this.routeGuard.checkRoleAccess(route.data.role).then(
+        (access) => menuOption.access = access,
+        (error) => this.log.error(error)
+      );
+    }
+  }
+
   onProjectChange(project: UserProject) {
     this.currentProject = project;
-    this.userManagerService.checkCurrentAccess();
+    this.routeGuard.checkCurrentAccess();
+    this.setMenuOptionAccess();
   }
 
   getUserProfile() {

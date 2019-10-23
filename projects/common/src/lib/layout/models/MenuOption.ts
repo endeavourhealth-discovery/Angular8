@@ -3,4 +3,5 @@ export class MenuOption {
 	state:string;
 	icon:string;
 	badge?:string;
+	access?: boolean;
 }
