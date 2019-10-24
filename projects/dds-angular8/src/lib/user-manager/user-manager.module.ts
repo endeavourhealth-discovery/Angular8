@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {UserManagerService} from "./user-manager.service";
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {UserProjectHttpInterceptor} from './user-project-http-interceptor';
 
 @NgModule({
     imports: [
@@ -8,7 +10,12 @@ import {UserManagerService} from "./user-manager.service";
     ],
     declarations: [],
     providers: [
-        UserManagerService
+        UserManagerService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: UserProjectHttpInterceptor,
+        multi: true
+      }
     ]
 })
 export class UserManagerModule { }
