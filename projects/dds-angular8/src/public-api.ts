@@ -14,3 +14,6 @@ export {LoggerService} from './lib/logger/logger.service';
 
 export {UserManagerModule} from './lib/user-manager/user-manager.module';
 export {UserManagerService} from './lib/user-manager/user-manager.service';
+
+export {CoreModule} from './lib/core/core.module';
+export {StateService} from './lib/core/state.service';

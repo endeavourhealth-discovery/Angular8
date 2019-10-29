@@ -67,17 +67,17 @@ export class LayoutComponent implements OnInit {
     this.setMenuOptionAccess();
   }
 
-  getUserProfile() {
-    this.userManagerService.getUserProfile()
+  getUserProfile(force: boolean = false) {
+    this.userManagerService.getUserProfile(force)
       .then(
-        (profile) => this.setUserProfile(profile),
+        (profile) => this.setUserProfile(profile, force),
         (error) => this.log.error(error)
       );
   }
 
-  setUserProfile(profile: UserProfile) {
+  setUserProfile(profile: UserProfile, force: boolean = false) {
     this.user = profile;
-    this.userManagerService.getUserProjects()
+    this.userManagerService.getUserProjects(force)
       .then(
         (projects) => this.userProjects = projects,
         (error) => this.log.error(error)
@@ -112,7 +112,7 @@ export class LayoutComponent implements OnInit {
 
   setDefault(project: UserProject) {
     this.userManagerService.changeDefaultProject(project.id, this.userManagerService.getSelectedProject().id).subscribe(
-      (ok) => this.getUserProfile(),
+      (ok) => this.getUserProfile(true),
       (error) => this.log.error(error)
     );
   }

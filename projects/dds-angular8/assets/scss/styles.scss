@@ -35,8 +35,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-card-header {
   padding: 16px 16px 0 16px !important;
-  .mat-icon {
-    font-size: 48px;
+  .mat-card-avatar {
+    .mat-icon {
+      font-size: 48px;
+    }
+  }
+  .mat-action {
+    .mat-icon {
+      font-size: 38px;
+      cursor: pointer;
+      padding-right: 9px;
+      padding-top: 4px;
+    }
   }
 }
 
@@ -54,8 +64,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .flex {
-  .mat-form-field-wrapper {
-    padding-bottom: 0px;
+  .mat-form-field-appearance-outline {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
   }
 }
 
@@ -75,4 +87,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-table {
   margin-right: 16px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0.35);
 }

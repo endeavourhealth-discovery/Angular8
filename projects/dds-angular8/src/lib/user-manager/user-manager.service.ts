@@ -24,9 +24,9 @@ export class UserManagerService {
     this._keycloakUserId = keycloakService.getKeycloakInstance().idTokenParsed.sub;
   }
 
-  getUserProfile(): Promise<UserProfile> {
+  getUserProfile(force: boolean = false): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
-      if (this._userProfile)
+      if (this._userProfile && !force)
         resolve(this._userProfile);
       else {
         this.loadUserProfile().subscribe(
@@ -37,9 +37,9 @@ export class UserManagerService {
     });
   }
 
-  getUserProjects(): Promise<UserProject[]> {
+  getUserProjects(force: boolean = false): Promise<UserProject[]> {
     return new Promise((resolve, reject) => {
-      if (this._userProjects)
+      if (this._userProjects && !force)
         resolve(this._userProjects);
       else {
         this.loadUserProjects().subscribe(
