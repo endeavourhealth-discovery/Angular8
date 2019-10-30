@@ -58,21 +58,22 @@ $header-height: 64px;
 }
 
 .logo {
-  -webkit-transition-property: width, height, padding,  -webkit-transform;
+  -webkit-transition-property: width, height, padding, -webkit-transform;
   transition-property: transform, width, height, padding, -webkit-transform;
   -webkit-transition-duration: 150ms;
   transition-duration: 150ms;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 
-    width: 24px;
-    height: 24px;
-    padding: 20px 16px;
+  width: 24px;
+  height: 24px;
+  padding: 20px 16px;
+  border-radius: 50%;
 
   .collapsed & {
-    width: 32px !important;
-    height: 32px !important;
-    padding: 16px !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 12px !important;
   }
 }
 
@@ -179,6 +180,8 @@ $header-height: 64px;
 }
 .layout-body {
   padding: 16px;
+  height: calc(100% - 96px);
+  overflow-y: auto;
 }
 
 .nav-user {

@@ -1,7 +1,7 @@
 @import "layout-theme";
 
 .logo {
-  content: url('~dds-angular8/assets/img/logo.png');
+  content: url('~dds-angular8/assets/img/logo.svg');
 }
 
 .default-avatar {
@@ -9,7 +9,7 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden}
 
 .material-icons.md-18 {
   font-size: 18px;
