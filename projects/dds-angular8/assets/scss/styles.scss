@@ -92,3 +92,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: rgba(0, 0, 0, 0.35);
 }
+
+.mat-tree-node {
+  min-height: unset;
+}
