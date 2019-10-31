@@ -129,6 +129,9 @@ export class UserManagerService {
 
   private setUserProjects(projects: UserProject[]) {
     this._userProjects = projects;
-    this.setSelectedProject(projects.find(p => p.default));
+    let def = projects.find(p => p.default);
+    if (def == null && projects.length > 0)
+      def = projects[0];
+    this.setSelectedProject(def);
   }
 }
