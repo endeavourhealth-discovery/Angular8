@@ -12,7 +12,7 @@ export class UserProjectHttpInterceptor implements HttpInterceptor {
     if (activeProject && activeProject.projectId) {
       request = request.clone({
         setHeaders: {
-          projectId: activeProject.projectId
+          userProjectId: activeProject.id
         }
       });
     }
