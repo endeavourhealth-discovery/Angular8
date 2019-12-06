@@ -63,7 +63,6 @@ export class UserManagerService {
     let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == newProject.projectId).applicationPolicyAttributes;
     let appAttributes = attributes.filter(x => x.application == this.menuProvider.getApplicationTitle());
     newProject.applicationPolicyAttributes = appAttributes;
-    console.log('switching prohjects', newProject);
 
     this.onProjectChange.next(newProject);
     this._selectedProject = newProject;
@@ -90,8 +89,6 @@ export class UserManagerService {
       else {
         let authorised = false;
         let application = this.menuProvider.getApplicationTitle();
-
-        console.log('In checking access role');
 
         this.getUserProfile().then(
           () => {
