@@ -53,12 +53,30 @@ export class LayoutComponent implements OnInit {
   setMenuOptionAccess() {
     let routes: Route[] = this.router.config;
     for (let menuOption of this.menuItems) {
-      let route = routes.find(r => r.path == menuOption.state);
+      let route: Route = routes.find(r => this.routeMatches(menuOption.state, r.path));
       this.routeGuard.checkRoleAccess(route.data.role).then(
         (access) => menuOption.access = access,
         (error) => this.log.error(error)
       );
     }
+  }
+
+  routeMatches(state: string, route: string) : boolean {
+    const stateParts = state.split('/');
+    const routeParts = route.split('/');
+
+    if (routeParts.length !== stateParts.length)
+      return false;
+
+    for (let i = 0; i < routeParts.length; i++) {
+      const r = routeParts[i];
+      const s = stateParts[i];
+
+      if (!r.startsWith(':') && r !== s)
+        return null;
+    }
+
+    return true;
   }
 
   onProjectChange(project: UserProject) {

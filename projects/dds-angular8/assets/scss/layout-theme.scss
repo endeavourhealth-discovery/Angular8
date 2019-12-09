@@ -15,11 +15,7 @@
   background-color: #d32f2f !important;
 }
 
-@mixin theme-layout($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $background: mat-color($primary, 50);
-
+@mixin theme-common($primary, $accent, $background) {
   .layout-header {
     background-color: mat-color($primary, 200);
   }
@@ -31,10 +27,6 @@
 
   .logo-container {
     background-color: mat-color($primary, 900);
-  }
-
-  .nav-content {
-    background-color: white;
   }
 
   .nav-user {
@@ -49,14 +41,29 @@
     color: mat-color($accent);
   }
 
-  .mat-card {
-    background-color: mat-color($primary, 200);
-  }
-
   .mat-card-content,
   .mat-table,
   .mat-paginator {
     background-color: $background;
+    .mat-select-content {
+      background-color: mat-color($accent);
+    }
+  }
+}
+
+@mixin theme-layout($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $background: mat-color($primary, 50);
+
+  @include theme-common($primary, $accent, $background);
+
+  .nav-content {
+    background-color: white;
+  }
+
+  .mat-card {
+    background-color: mat-color($primary, 200);
   }
 }
 
@@ -65,46 +72,13 @@
   $accent: map-get($theme, accent);
   $background: mat-color($primary, 600);
 
-  .layout-header {
-    background-color: mat-color($primary, 200);
-  }
-
-  .side-nav {
-    background-color: mat-color($primary, 800);
-    color: mat-color($primary, 50);
-  }
-
-  .logo-container {
-    background-color: mat-color($primary, 900);
-  }
+  @include theme-common($primary, $accent, $background);
 
   .nav-content {
     background-color: mat-color($primary, 700);
   }
 
-  .nav-user {
-    background-color: mat-color($primary, 900);
-
-    h5 {
-      color: mat-color($primary, 300);
-    }
-  }
-
-  .mat-card-avatar {
-    color: mat-color($accent);
-  }
-
   .mat-card {
     background-color: mat-color($primary, 500);
-  }
-
-  .mat-card-content {
-    background-color: $background;
-  }
-
-  .mat-card-content,
-  .mat-table,
-  .mat-paginator {
-    background-color: $background;
   }
 }
