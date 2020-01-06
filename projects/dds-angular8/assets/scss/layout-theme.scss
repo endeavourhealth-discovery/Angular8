@@ -43,6 +43,7 @@
 
   .mat-card-content,
   .mat-table,
+  .mat-tree,
   .mat-paginator {
     background-color: $background;
     .mat-select-content {
@@ -65,6 +66,10 @@
   .mat-card {
     background-color: mat-color($primary, 200);
   }
+
+  tr.selected {
+    background-color: mat-color($primary, 100);
+  }
 }
 
 @mixin theme-layout-dark($theme) {
@@ -80,5 +85,9 @@
 
   .mat-card {
     background-color: mat-color($primary, 500);
+  }
+
+  tr.selected {
+    background-color: mat-color($primary, 700);
   }
 }

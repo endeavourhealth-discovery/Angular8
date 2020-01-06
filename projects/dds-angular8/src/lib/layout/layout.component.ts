@@ -134,4 +134,8 @@ export class LayoutComponent implements OnInit {
       (error) => this.log.error(error)
     );
   }
+
+  getHelp() {
+    window.open('https://help.discoverydataservice.net/' + this.menuService.getClientId() + this.router.url, '_blank');
+  }
 }

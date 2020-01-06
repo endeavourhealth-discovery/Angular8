@@ -60,6 +60,8 @@ export class UserManagerService {
   setSelectedProject(newProject: UserProject) {
     let org : UserOrganisationProject = this._userProfile.organisationProjects.find(x => x.organisation.uuid == newProject.organisationId);
 
+    // TODO: Handle "org === null" here
+
     let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == newProject.projectId).applicationPolicyAttributes;
     let appAttributes = attributes.filter(x => x.application == this.menuProvider.getApplicationTitle());
     newProject.applicationPolicyAttributes = appAttributes;
