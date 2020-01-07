@@ -136,6 +136,13 @@ export class LayoutComponent implements OnInit {
   }
 
   getHelp() {
-    window.open('https://help.discoverydataservice.org/' + this.menuService.getClientId() + this.router.url, '_blank');
+    if (this.router
+      && this.router.routerState
+      && this.router.routerState.root
+      && this.router.routerState.root.firstChild
+      && this.router.routerState.root.firstChild.snapshot
+      && this.router.routerState.root.firstChild.snapshot.data
+      && this.router.routerState.root.firstChild.snapshot.data.helpContext)
+      window.open('https://help.discoverydataservice.org/' + this.menuService.getClientId() + '/' + this.router.routerState.root.firstChild.snapshot.data.helpContext, 'Help');
   }
 }
