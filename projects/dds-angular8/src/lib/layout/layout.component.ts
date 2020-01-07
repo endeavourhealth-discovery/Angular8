@@ -136,6 +136,6 @@ export class LayoutComponent implements OnInit {
   }
 
   getHelp() {
-    window.open('https://help.discoverydataservice.net/' + this.menuService.getClientId() + this.router.url, '_blank');
+    window.open('https://help.discoverydataservice.org/' + this.menuService.getClientId() + this.router.url, '_blank');
   }
 }
