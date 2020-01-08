@@ -38,15 +38,11 @@
       <span class="title">{{title}}</span>
       <span class="toolbar-fill"></span>
 
-<!--      <button mat-button>
-        <mat-icon matBadge="13" matBadgePosition="above after" matBadgeColor="accent">format_list_bulleted</mat-icon>
-      </button>-->
-
       <button mat-button *ngIf="currentProject" [matMenuTriggerFor]="projects">
         <mat-icon>work</mat-icon> {{currentProject.projectName}} <small>({{currentProject.organisationName}})</small>
       </button>
       <mat-menu #projects="matMenu" xPosition="before">
-        <button *ngFor="let item of userProjects" mat-menu-item (click)="switchProject(item)" [ngClass]="{'mat-flat-button mat-accent': (item.id==currentProject.id)}">
+        <button *ngFor="let item of userProjects" mat-menu-item (click)="switchProject(item)" [ngClass]="{'mat-flat-button mat-accent': (item.id==currentProject?.id)}">
           <mat-icon (click)="setDefault(item)">{{item.default ? 'star' : 'star_border'}}</mat-icon> <span>{{item.projectName}} <small>({{item.organisationName}})</small></span>
         </button>
       </mat-menu>

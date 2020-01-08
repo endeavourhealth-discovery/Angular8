@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {UserProject} from './models/UserProject';
 import {UserProfile} from './models/UserProfile';
 import {Observable, ReplaySubject} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Region} from './models/Region';
+import {HttpClient, HttpEvent, HttpHandler, HttpParams, HttpRequest} from '@angular/common/http';
 import {KeycloakService} from 'keycloak-angular';
 import {UserOrganisationProject} from './models/UserOrganisationProject';
 import {ApplicationPolicyAttribute} from './models/ApplicationPolicyAttribute';
@@ -12,8 +11,8 @@ import {AbstractMenuProvider} from '../layout/menuProvider.service';
 @Injectable()
 export class UserManagerService {
   private readonly _keycloakUserId: string;
-  private _userProfile: UserProfile;
-  private _userProjects: UserProject[];
+  private _userProfilePromise: Promise<UserProfile>;
+  private _userProjectsPromise: Promise<UserProject[]>;
   private _selectedProject: UserProject;
 
   public onProjectChange: ReplaySubject<UserProject> = new ReplaySubject<UserProject>(1);
@@ -25,53 +24,56 @@ export class UserManagerService {
   }
 
   getUserProfile(force: boolean = false): Promise<UserProfile> {
-    return new Promise((resolve, reject) => {
-      if (this._userProfile && !force)
-        resolve(this._userProfile);
-      else {
-        this.loadUserProfile().subscribe(
-          (profile) => resolve(this._userProfile = profile),
-          (error) => reject(error)
-        )
-      }
-    });
+    if (!this._userProfilePromise || force)
+      this._userProfilePromise = this.loadUserProfile().toPromise();
+
+    return this._userProfilePromise;
   }
 
   getUserProjects(force: boolean = false): Promise<UserProject[]> {
-    return new Promise((resolve, reject) => {
-      if (this._userProjects && !force)
-        resolve(this._userProjects);
-      else {
-        this.loadUserProjects().subscribe(
-          (projects) => {
-            this.setUserProjects(projects);
-            resolve(projects);
-          },
-          (error) => reject(error)
-        )
-      }
-    });
+    if (!this._userProjectsPromise || force)
+      this._userProjectsPromise = this.loadUserProjects().toPromise();
+
+    return this._userProjectsPromise;
   }
 
-  getSelectedProject(): UserProject {
-    return this._selectedProject;
+  getSelectedProject(): Promise<UserProject> {
+    return new Promise<UserProject>((resolve, reject) => {
+        if (this._selectedProject)
+          resolve(this._selectedProject);
+        else {
+          // none selected, get default
+          this.getUserProjects().then(
+            (projects) => {
+              let def = projects.find(p => p.default);
+              if (def == null && projects.length > 0)
+                def = projects[0];
+              this.setSelectedProject(def);
+              resolve(def);
+            },
+            (error) => reject(error)
+          );
+        }
+      }
+    );
   }
 
   setSelectedProject(newProject: UserProject) {
-    let org : UserOrganisationProject = this._userProfile.organisationProjects.find(x => x.organisation.uuid == newProject.organisationId);
+    this._userProfilePromise.then(
+      (up) => {
+        let org : UserOrganisationProject = up.organisationProjects.find(x => x.organisation.uuid == newProject.organisationId);
 
-    // TODO: Handle "org === null" here
+        // TODO: Handle "org === null" here
 
-    let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == newProject.projectId).applicationPolicyAttributes;
-    let appAttributes = attributes.filter(x => x.application == this.menuProvider.getApplicationTitle());
-    newProject.applicationPolicyAttributes = appAttributes;
+        let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == newProject.projectId).applicationPolicyAttributes;
+        let appAttributes = attributes.filter(x => x.application == this.menuProvider.getApplicationTitle());
+        newProject.applicationPolicyAttributes = appAttributes;
 
-    this.onProjectChange.next(newProject);
-    this._selectedProject = newProject;
-  }
+        this.onProjectChange.next(newProject);
+        this._selectedProject = newProject;
+      }
+    );
 
-  getUserRegion(): Region {
-    return this._userProfile.region;
   }
 
   changeDefaultProject(defaultProject: string, userProjectId: string): Observable<string> {
@@ -84,7 +86,6 @@ export class UserManagerService {
   }
 
   checkRoleAccess(role : string) : Promise<boolean>  {
-
     return new Promise((resolve, reject) => {
       if (role == null || role == '')
         resolve(true);
@@ -93,13 +94,13 @@ export class UserManagerService {
         let application = this.menuProvider.getApplicationTitle();
 
         this.getUserProfile().then(
-          () => {
-            this.getUserProjects().then(
-              () => {
-                let org: UserOrganisationProject = this._userProfile.organisationProjects.find(x => x.organisation.uuid == this._selectedProject.organisationId);
+          (up) => {
+            this.getSelectedProject().then(
+              (selected) => {
+                let org: UserOrganisationProject = up.organisationProjects.find(x => x.organisation.uuid == selected.organisationId);
 
                 if (org != null) {
-                  let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == this._selectedProject.projectId).applicationPolicyAttributes;
+                  let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == selected.projectId).applicationPolicyAttributes;
                   if (attributes != null) {
                     let appAttributes = attributes.filter(x => x.application == application);
                     if (appAttributes != null)
@@ -117,6 +118,18 @@ export class UserManagerService {
     });
   }
 
+  injectProject(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (this._selectedProject && this._selectedProject.projectId) {
+      request = request.clone({
+        setHeaders: {
+          userProjectId: this._selectedProject.id
+        }
+      });
+    }
+
+    return next.handle(request);
+  }
+
   logout() {
     this.keycloakService.logout();
   }
@@ -125,21 +138,15 @@ export class UserManagerService {
     const vm = this;
     let params = new HttpParams();
     params = params.append('userId', this._keycloakUserId);
-    return vm.http.get<UserProfile>('api/userManager/getUserProfile', {params: params});
+    return vm.http
+      .get<UserProfile>('api/userManager/getUserProfile', {params: params});
   }
 
   private loadUserProjects(): Observable<UserProject[]> {
     const vm = this;
     let params = new HttpParams();
     params = params.append('userId', this._keycloakUserId);
-    return vm.http.get<UserProject[]>('api/userManager/getProjects', {params: params});
-  }
-
-  private setUserProjects(projects: UserProject[]) {
-    this._userProjects = projects;
-    let def = projects.find(p => p.default);
-    if (def == null && projects.length > 0)
-      def = projects[0];
-    this.setSelectedProject(def);
+    return vm.http
+      .get<UserProject[]>('api/userManager/getProjects', {params: params});
   }
 }

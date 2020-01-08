@@ -5,18 +5,10 @@ import {UserManagerService} from './user-manager.service';
 
 @Injectable()
 export class UserProjectHttpInterceptor implements HttpInterceptor {
-  constructor(private userManagerService: UserManagerService) { }
+  constructor(private userManagerService: UserManagerService) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let activeProject = this.userManagerService.getSelectedProject();
-    if (activeProject && activeProject.projectId) {
-      request = request.clone({
-        setHeaders: {
-          userProjectId: activeProject.id
-        }
-      });
-    }
-
-    return next.handle(request);
+    return this.userManagerService.injectProject(request, next);
   }
 }

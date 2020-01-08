@@ -129,8 +129,13 @@ export class LayoutComponent implements OnInit {
   }
 
   setDefault(project: UserProject) {
-    this.userManagerService.changeDefaultProject(project.id, this.userManagerService.getSelectedProject().id).subscribe(
-      (ok) => this.getUserProfile(true),
+    this.userManagerService.getSelectedProject().then(
+      (selectedProject) => {
+        this.userManagerService.changeDefaultProject(project.id, selectedProject.id).subscribe(
+          (ok) => this.getUserProfile(true),
+          (error) => this.log.error(error)
+        );
+      },
       (error) => this.log.error(error)
     );
   }
