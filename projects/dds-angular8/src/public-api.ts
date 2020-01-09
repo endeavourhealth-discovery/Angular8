@@ -19,3 +19,5 @@ export {CoreModule} from './lib/core/core.module';
 export {StateService} from './lib/core/state.service';
 
 export {GenericTableModule} from './lib/generic-table/generic-table.module';
+export {GenericTableComponent} from './lib/generic-table/generic-table/generic-table.component';
+export {GenericTableSspComponent} from './lib/generic-table/generic-table-ssp/generic-table-ssp.component';

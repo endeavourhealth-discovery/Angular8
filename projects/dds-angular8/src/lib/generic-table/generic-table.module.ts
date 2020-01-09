@@ -6,7 +6,7 @@ import {
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatDatepickerModule,
   MatDialogModule,
   MatDividerModule, MatFormFieldModule,
   MatIconModule,
@@ -20,7 +20,6 @@ import {
 } from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
-// import {FlexModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from 'keycloak-angular';
@@ -50,11 +49,11 @@ import {CoreModule} from 'keycloak-angular';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     RouterModule,
-    // FlexModule,
     MatSelectModule,
     MatSnackBarModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatDatepickerModule,
     MatDialogModule,
     CoreModule,
     MatButtonModule,
