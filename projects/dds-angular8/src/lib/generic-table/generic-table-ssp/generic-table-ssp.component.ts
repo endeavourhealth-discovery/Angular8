@@ -8,11 +8,12 @@ import {MatPaginator, MatSort, MatTable, MatTableDataSource} from "@angular/mate
   styleUrls: ['./generic-table-ssp.component.scss']
 })
 export class GenericTableSspComponent implements OnInit, AfterViewInit, OnChanges {
-  @Input() items : any[] = [];
-  @Input() totalItems : number;
-  @Input() detailsToShow : any[] = [];
-  @Input() pageSize : number = 20;
-  @Input() allowSelect : boolean = false;
+  @Input() items: any[] = [];
+  @Input() totalItems: number;
+  @Input() detailsToShow: any[] = [];
+  @Input() pageSize = 20;
+  @Input() allowSelect = false;
+  @Input() allowSearch = true;
 
   @Output() deleted: EventEmitter<any[]> = new EventEmitter<any[]>();
   @Output() clicked: EventEmitter<any> = new EventEmitter<any>();

@@ -12,6 +12,7 @@ export class GenericTableComponent implements OnInit, OnChanges {
   @Input() detailsToShow: any[] = [];
   @Input() pageSize = 20;
   @Input() allowSelect = false;
+  @Input() allowSearch = true;
 
   @Output() clicked: EventEmitter<any> = new EventEmitter<any>();
 

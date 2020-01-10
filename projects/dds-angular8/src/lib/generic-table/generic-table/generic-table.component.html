@@ -1,6 +1,6 @@
 
 <div class="flex" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="16px grid" fxLayoutAlign="start">
-  <mat-form-field *ngIf="dataSource?.length > pageSize || filtered" appearance="outline" fxFlex="50" fxFill>
+  <mat-form-field *ngIf="(dataSource?.length > pageSize || filtered) && allowSearch" appearance="outline" fxFlex="50" fxFill>
     <mat-label>Search</mat-label>
     <input matInput [(ngModel)]="filterText" (keyup.enter)="applyFilter($event.target.value)" placeholder="Search">
     <button mat-button *ngIf="filterText" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">

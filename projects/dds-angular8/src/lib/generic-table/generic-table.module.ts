@@ -23,6 +23,7 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from 'keycloak-angular';
+import {FlexModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import {CoreModule} from 'keycloak-angular';
     MatDividerModule,
     MatTabsModule,
     MatBadgeModule,
+    FlexModule
   ]
 })
 export class GenericTableModule { }
