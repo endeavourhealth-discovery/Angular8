@@ -21,3 +21,6 @@ export {StateService} from './lib/core/state.service';
 export {GenericTableModule} from './lib/generic-table/generic-table.module';
 export {GenericTableComponent} from './lib/generic-table/generic-table/generic-table.component';
 export {GenericTableSspComponent} from './lib/generic-table/generic-table-ssp/generic-table-ssp.component';
+
+export {DialogsModule} from './lib/dialogs/dialogs.module';
+export {MessageBoxDialogComponent} from './lib/dialogs/message-box-dialog/message-box-dialog.component';
