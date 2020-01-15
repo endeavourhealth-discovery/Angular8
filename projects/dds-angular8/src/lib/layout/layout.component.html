@@ -1,7 +1,7 @@
 <div class="side-nav" (mouseenter)="expand()" (mouseleave)="collapse()" [class.collapsed]="!(open||pinned)" [class.pinned]="pinned">
   <div class="logo-container">
     <img class="logo">
-    <span class="title" *ngIf="open || pinned">DISCOVERY</span>
+    <span class="title" *ngIf="open || pinned">Discovery data service</span>
     <button mat-button class="toggle" *ngIf="open || pinned" (click)="togglePin()">
       <mat-icon>{{pinIcon}}</mat-icon>
     </button>
