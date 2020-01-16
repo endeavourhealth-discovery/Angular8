@@ -51,7 +51,8 @@
         (click)="clickItem(row)"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+  <mat-paginator [style.display]="(totalItems > pageSize) ? 'block' : 'none'"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
                  [showFirstLastButtons]="true"
                  [pageSize]="pageSize"
                  [length]="totalItems"
