@@ -26,7 +26,7 @@
   </div>
   <div class="nav-entries">
     <button mat-button *ngFor="let item of menuItems" [routerLink]="item.state" [disabled]="!item.access">
-      <i class="fa-fw fa-lg {{item.icon}}"></i>
+      <i class="fa-fw fa-lg {{item.icon}}" style="padding-right: 12px;"></i>
       <span *ngIf="open || pinned" [matBadge]="item.badge" matBadgePosition="after" matBadgeColor="accent" matBadgeOverlap="false"> {{item.caption}}</span>
     </button>
   </div>

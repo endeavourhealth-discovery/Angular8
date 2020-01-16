@@ -37,10 +37,6 @@
     }
   }
 
-  .mat-card-avatar {
-    color: mat-color($accent);
-  }
-
   .mat-card-content,
   .mat-table,
   .mat-tree,
@@ -49,6 +45,10 @@
     .mat-select-content {
       background-color: mat-color($accent);
     }
+  }
+
+  tr.selected {
+    background-color: mat-color($accent);
   }
 }
 
@@ -63,11 +63,11 @@
     background-color: white;
   }
 
-  .mat-card {
-    background-color: mat-color($primary, 200);
+  .mat-card-avatar {
+    color: darkslategray;
   }
 
-  tr.selected {
+  .mat-card {
     background-color: mat-color($primary, 100);
   }
 }
@@ -83,11 +83,11 @@
     background-color: mat-color($primary, 700);
   }
 
-  .mat-card {
-    background-color: mat-color($primary, 500);
+  .mat-card-avatar {
+    color: whitesmoke;
   }
 
-  tr.selected {
-    background-color: mat-color($primary, 700);
+  .mat-card {
+    background-color: mat-color($primary, 500);
   }
 }
