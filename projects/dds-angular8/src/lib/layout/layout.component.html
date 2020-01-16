@@ -2,8 +2,8 @@
   <div class="logo-container">
     <img class="logo">
     <span class="title" *ngIf="open || pinned">Discovery Data Service</span>
-    <button mat-button class="toggle" *ngIf="open || pinned" (click)="togglePin()">
-      <mat-icon>{{pinIcon}}</mat-icon>
+    <button mat-button class="toggle" *ngIf="open || pinned" (click)="togglePin()" matTooltip="Pin sidebar">
+      <i class="far fa-fw {{pinIcon}}"></i>
     </button>
   </div>
   <div class="nav-user flex-center">
@@ -12,14 +12,14 @@
       <h4>{{user?.forename}} {{user?.surname}}</h4>
       <h5>{{user?.email}}</h5>
       <div class="actions flex-center">
-        <button mat-button>
-          <mat-icon>account_box</mat-icon>
+        <button mat-button matTooltip="User profile">
+          <i class="fas fa-fw fa-user"></i>
         </button>
-        <button mat-button>
-          <mat-icon>settings</mat-icon>
+        <button mat-button matTooltip="User settings">
+          <i class="fas fa-fw fa-sliders-h"></i>
         </button>
-        <button mat-button (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
+        <button mat-button (click)="logout()" matTooltip="Logout">
+          <i class="fas fa-fw fa-sign-out"></i>
         </button>
       </div>
     </div>
@@ -38,34 +38,34 @@
       <span class="title">{{title}}</span>
       <span class="toolbar-fill"></span>
 
-      <button mat-button *ngIf="currentProject" [matMenuTriggerFor]="projects">
-        <mat-icon>work</mat-icon> {{currentProject.projectName}} <small>({{currentProject.organisationName}})</small>
+      <button mat-button *ngIf="currentProject" [matMenuTriggerFor]="projects" matTooltip="Currently selected project">
+        <i class="fas fa-fw fa-2x fa-briefcase"></i> {{currentProject.projectName}} <small>({{currentProject.organisationName}})</small>
       </button>
       <mat-menu #projects="matMenu" xPosition="before">
         <button *ngFor="let item of userProjects" mat-menu-item (click)="switchProject(item)" [ngClass]="{'mat-flat-button mat-accent': (item.id==currentProject?.id)}">
-          <mat-icon (click)="setDefault(item)">{{item.default ? 'star' : 'star_border'}}</mat-icon> <span>{{item.projectName}} <small>({{item.organisationName}})</small></span>
+          <i (click)="setDefault(item)" [class]="item.default ? 'fas fa-fw fa-star' : 'far fa-fw fa-star'" style="padding-right: 8px;"></i> <span>{{item.projectName}} <small>({{item.organisationName}})</small></span>
         </button>
       </mat-menu>
 
 
-      <button mat-button [matMenuTriggerFor]="menu">
+      <button mat-button [matMenuTriggerFor]="menu" matTooltip="User menu">
         <img class="avatar" [src]="(user?.photo == null) ? 'avatar.png' : user?.photo">
         <span class="name">{{user?.forename}} {{user?.surname}}</span>
-        <mat-icon>keyboard_arrow_down</mat-icon>
+        <i class="fas fa-fw fa-chevron-down"></i>
       </button>
 
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item><mat-icon>account_box</mat-icon>Profile</button>
-        <button mat-menu-item [matMenuTriggerFor]="themeMenu"><mat-icon>format_paint</mat-icon>Theme</button>
-        <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
-        <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+        <button mat-menu-item><i class="fas fa-fw fa-user" style="padding-right: 8px;"></i>Profile</button>
+        <button mat-menu-item [matMenuTriggerFor]="themeMenu"><i class="fas fa-fw fa-paint-roller" style="padding-right: 8px;"></i>Theme</button>
+        <button mat-menu-item><i class="fas fa-fw fa-sliders-h" style="padding-right: 8px;"></i>Settings</button>
+        <button mat-menu-item (click)="logout()"><i class="fas fa-fw fa-sign-out" style="padding-right: 8px;"></i>Logout</button>
       </mat-menu>
       <mat-menu #themeMenu="matMenu">
         <button mat-menu-item (click)="onSetTheme('default-theme')">Default</button>
         <button mat-menu-item (click)="onSetTheme('dark-theme')">Dark</button>
         <button mat-menu-item (click)="onSetTheme('teal-theme')">Teal</button>
       </mat-menu>
-      <button mat-button (click)="getHelp()"><mat-icon>help_outline</mat-icon></button>
+      <button mat-button (click)="getHelp()" matTooltip="Online help"><i class="far fa-fw fa-2x fa-question-circle"></i></button>
     </mat-toolbar>
   </div>
   <div class="layout-body">

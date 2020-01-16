@@ -4,7 +4,7 @@
     <mat-label>Search</mat-label>
     <input matInput [(ngModel)]="filterText" (keyup.enter)="applyFilter($event.target.value)" placeholder="Search">
     <button mat-button *ngIf="filterText" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
-      <mat-icon>close</mat-icon>
+      <i class="far fa-fw fa-times"></i>
     </button>
   </mat-form-field>
 </div>

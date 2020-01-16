@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit {
 
   open = false;
   pinned = false;
-  pinIcon = 'radio_button_unchecked';
+  pinIcon = 'fa-circle';
 
   title = '';
   user: UserProfile;
@@ -112,7 +112,7 @@ export class LayoutComponent implements OnInit {
 
   togglePin() {
     this.pinned = !this.pinned;
-    this.pinIcon = (this.pinned) ? 'radio_button_checked' : 'radio_button_unchecked';
+    this.pinIcon = (this.pinned) ? 'fa-dot-circle' : 'fa-circle';
   }
 
   logout() {
