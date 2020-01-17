@@ -37,6 +37,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
   padding: 16px 16px 0 16px !important;
   .mat-card-avatar {
     font-size: 40px;
+    padding-right: 8px;
+    i {
+      width: 1.25em;
+      text-align: center;
+    }
   }
   .mat-action {
     .mat-icon {
