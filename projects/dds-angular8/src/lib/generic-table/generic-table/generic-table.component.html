@@ -42,7 +42,8 @@
 
     <tr mat-header-row *matHeaderRowDef="propertiesToShow"></tr>
     <tr mat-row *matRowDef="let row; columns: propertiesToShow;"
-        (click)="clickItem(row)"></tr>
+        (click)="clickItem(row, $event)"
+        [style.background]="highlightedRows === row ? 'lightblue' : ''"></tr>
   </table>
   <div>
   </div>

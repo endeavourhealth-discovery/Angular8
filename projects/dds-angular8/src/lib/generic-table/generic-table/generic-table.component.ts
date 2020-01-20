@@ -25,6 +25,7 @@ export class GenericTableComponent implements OnInit, OnChanges {
   filtered  = false;
   dataSource: any;
   selection = new SelectionModel<any>(true, []);
+  highlightedRows: any;
 
   constructor() {
 
@@ -76,8 +77,11 @@ export class GenericTableComponent implements OnInit, OnChanges {
     this.applyFilter('');
   }
 
-  clickItem(row: any) {
-    this.clicked.emit(row);
+  clickItem(row: any, e: any) {
+    this.highlightedRows = row;
+    if (!e.target.className.includes('mat-column-select')) {
+      this.clicked.emit(row);
+    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
