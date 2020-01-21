@@ -57,6 +57,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
   padding: 16px;
 }
 
+.mat-card-subtitle {
+  min-height: 17px;
+}
+
 
 .mat-card-content.fill {
   height: calc(100% - 100px);

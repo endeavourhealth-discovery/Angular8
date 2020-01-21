@@ -42,6 +42,10 @@ export class GenericTableSspComponent implements OnInit, AfterViewInit, OnChange
     this.propertiesToShow = this.detailsToShow.map(x => x.property);
   }
 
+  clearHighlights() {
+    this.highlightedRows = null;
+  }
+
   updateRows() {
     this.dataSource = new MatTableDataSource(this.items);
     this.dataSource.sort = this.sort;

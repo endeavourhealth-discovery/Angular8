@@ -31,6 +31,10 @@ export class GenericTableComponent implements OnInit, OnChanges {
 
   }
 
+  clearHighlights() {
+    this.highlightedRows = null;
+  }
+
   updateRows() {
     this.dataSource = new MatTableDataSource(this.items);
     this.dataSource.sort = this.sort;
