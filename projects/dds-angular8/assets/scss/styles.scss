@@ -11,6 +11,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden}
 
+/* Icon sizing */
 .material-icons.md-18 {
   font-size: 18px;
 }
@@ -44,11 +45,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
     }
   }
   .mat-action {
-    .mat-icon {
-      font-size: 38px;
-      cursor: pointer;
-      padding-right: 9px;
-      padding-top: 4px;
+    font-size: 28px;
+    height: fit-content;
+    border-radius: 50%;
+    i {
+      padding: 8px 4px 6px 4px;
+      height: fit-content;
     }
   }
 }
@@ -67,6 +69,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
   overflow-y: scroll;
 }
 
+/* Dialogs */
+.mat-dialog-content {
+  font-size: 14px;
+  overflow: hidden !important;
+}
+
 .scroll {
   overflow-y: auto;
 }
@@ -75,17 +83,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
   max-width: none !important;
 }
 
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: rgba(0, 0, 0, 0.35);
-}
 
 
 /* Tables */
-.mat-table {
-  margin-right: 16px;
-}
-
-
 .mat-table-compact.mat-table
 {
   .mat-header-row,
@@ -109,6 +109,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
     display: flex;
   }
 }
+
+/* Style regular tables as material */
+table.mat-table {border-spacing:0}
+tr.mat-header-row{height:56px}
+tr.mat-footer-row,tr.mat-row{height:48px}
+th.mat-header-cell{text-align:left}
+[dir=rtl] th.mat-header-cell{text-align:right}
+td.mat-cell,td.mat-footer-cell,th.mat-header-cell{padding:0;border-bottom-width:1px;border-bottom-style:solid}
+td.mat-cell:first-of-type,td.mat-footer-cell:first-of-type,th.mat-header-cell:first-of-type{padding-left:24px}
+[dir=rtl] td.mat-cell:first-of-type,[dir=rtl] td.mat-footer-cell:first-of-type,[dir=rtl] th.mat-header-cell:first-of-type{padding-left:0;padding-right:24px}
+td.mat-cell:last-of-type,td.mat-footer-cell:last-of-type,th.mat-header-cell:last-of-type{padding-right:24px}
+[dir=rtl] td.mat-cell:last-of-type,[dir=rtl] td.mat-footer-cell:last-of-type,[dir=rtl] th.mat-header-cell:last-of-type{padding-right:0;padding-left:24px}
+
 
 /* General/flex layout */
 
@@ -171,8 +184,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
 
 .show-child-on-hover:hover .child-to-hide {
   display: none;
-}
-
-.hover-highlight:hover {
-  background-color: aqua;
 }

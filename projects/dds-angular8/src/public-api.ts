@@ -24,3 +24,6 @@ export {GenericTableSspComponent} from './lib/generic-table/generic-table-ssp/ge
 
 export {DialogsModule} from './lib/dialogs/dialogs.module';
 export {MessageBoxDialogComponent} from './lib/dialogs/message-box-dialog/message-box-dialog.component';
+
+export {DirectivesModule} from './lib/directives/directives.module';
+export {MatReadonlyDirective} from './lib/directives/mat-readonly.directive';

@@ -47,8 +47,17 @@
     }
   }
 
-  tr.selected {
-    background-color: mat-color($accent);
+  /* Forms/inputs */
+  .mat-readonly.mat-form-field-appearance-outline {
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end {
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -70,6 +79,14 @@
   .mat-card {
     background-color: mat-color($primary, 100);
   }
+
+  .selected {
+    background-color: mat-color($accent);
+  }
+
+  .hover-highlight:hover {
+    background-color: mat-color($accent, 200);
+  }
 }
 
 @mixin theme-layout-dark($theme) {
@@ -89,5 +106,13 @@
 
   .mat-card {
     background-color: mat-color($primary, 500);
+  }
+
+  .selected {
+    background-color: mat-color($accent, 800);
+  }
+
+  .hover-highlight:hover {
+    background-color: mat-color($accent, 600);
   }
 }
