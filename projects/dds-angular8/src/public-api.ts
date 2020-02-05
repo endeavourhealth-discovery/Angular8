@@ -27,3 +27,6 @@ export {MessageBoxDialogComponent} from './lib/dialogs/message-box-dialog/messag
 
 export {DirectivesModule} from './lib/directives/directives.module';
 export {MatReadonlyDirective} from './lib/directives/mat-readonly.directive';
+
+export {ItemLinkageModule} from './lib/item-linkages/item-linkage.module';
+export {ItemLinkageService} from './lib/item-linkages/item-linkage.service';
