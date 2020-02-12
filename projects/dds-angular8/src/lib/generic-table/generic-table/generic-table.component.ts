@@ -1,11 +1,19 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTable, MatTableDataSource} from "@angular/material";
 import {SelectionModel} from "@angular/cdk/collections";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-generic-table',
   templateUrl: './generic-table.component.html',
-  styleUrls: ['./generic-table.component.scss']
+  styleUrls: ['./generic-table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class GenericTableComponent implements OnInit, OnChanges {
   @Input() items: any[] = [];
@@ -13,6 +21,7 @@ export class GenericTableComponent implements OnInit, OnChanges {
   @Input() pageSize = 20;
   @Input() allowSelect = false;
   @Input() allowSearch = true;
+  @Input() allowExpand = true;
 
   @Output() clicked: EventEmitter<any> = new EventEmitter<any>();
 
@@ -20,6 +29,9 @@ export class GenericTableComponent implements OnInit, OnChanges {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   propertiesToShow: string[] = [];
+  expandedToShow: any[] = [];
+  primaryToShow: any[] = [];
+  expandedElement: null;
 
   public filterText = '';
   filtered  = false;
@@ -45,13 +57,18 @@ export class GenericTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.propertiesToShow = this.detailsToShow.map(x => x.property);
+
+    this.expandedToShow = this.detailsToShow.filter(det => det.secondary);
+    this.primaryToShow = this.detailsToShow.filter(det => !det.secondary);
+    this.propertiesToShow = this.primaryToShow.map(x => x.property);
+
   }
 
   ngOnChanges(changes) {
 
     this.updateRows();
     var selectIndex = this.propertiesToShow.indexOf('select');
+    var actionIndex: number = this.propertiesToShow.indexOf('action');
 
     // only allow items to be selected if user has admin rights
     if (this.allowSelect) {
@@ -61,6 +78,12 @@ export class GenericTableComponent implements OnInit, OnChanges {
     } else {
       if (selectIndex > -1) {
         this.propertiesToShow.splice(selectIndex, 1);
+      }
+    }
+
+    if (this.allowExpand && this.expandedToShow.length > 0) {
+      if (actionIndex < 0) {
+        this.propertiesToShow.push('action');
       }
     }
   }
@@ -75,6 +98,11 @@ export class GenericTableComponent implements OnInit, OnChanges {
     }
   }
 
+  expand(event, item: any) {
+    event.stopPropagation();
+    this.expandedElement = this.expandedElement === item ? null : item;
+  }
+
   clear() {
     this.filterText = '';
     this.filtered = false;
@@ -83,7 +111,8 @@ export class GenericTableComponent implements OnInit, OnChanges {
 
   clickItem(row: any, e: any) {
     this.highlightedRows = row;
-    if (!e.target.className.includes('mat-column-select')) {
+    console.log(e.target.className);
+    if (!e.target.className.includes('mat-column-select') && !e.target.className.includes('mat-column-action')) {
       this.clicked.emit(row);
     }
   }
