@@ -185,3 +185,8 @@ td.mat-cell:last-of-type,td.mat-footer-cell:last-of-type,th.mat-header-cell:last
 .show-child-on-hover:hover .child-to-hide {
   display: none;
 }
+
+.required-field-note:after {
+  color: red;
+  content: '* Required field';
+}
