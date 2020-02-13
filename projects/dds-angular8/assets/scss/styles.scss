@@ -190,3 +190,30 @@ td.mat-cell:last-of-type,td.mat-footer-cell:last-of-type,th.mat-header-cell:last
   color: red;
   content: '* Required field';
 }
+
+.mat-form-field-flex {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mat-form-field-prefix,
+.mat-form-field-suffix {
+  display: flex;
+  align-items: center;
+}
+
+table.mat-table-compact.mat-table {
+  tr.mat-row {
+    height: 30px;
+    td {
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+      button.mat-icon-button {
+        height: 29px;
+        width: 29px;
+        line-height: 29px;
+      }
+    }
+  }
+}
