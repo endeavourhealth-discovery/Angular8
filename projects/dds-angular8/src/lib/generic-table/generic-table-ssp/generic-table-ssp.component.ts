@@ -100,8 +100,6 @@ export class GenericTableSspComponent implements OnInit, AfterViewInit, OnChange
         this.propertiesToShow.push('action');
       }
     }
-
-    console.log(this.propertiesToShow);
   }
 
   expand(event: any, item: any) {

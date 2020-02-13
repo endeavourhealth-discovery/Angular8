@@ -111,7 +111,6 @@ export class GenericTableComponent implements OnInit, OnChanges {
 
   clickItem(row: any, e: any) {
     this.highlightedRows = row;
-    console.log(e.target.className);
     if (!e.target.className.includes('mat-column-select') && !e.target.className.includes('mat-column-action')) {
       this.clicked.emit(row);
     }
