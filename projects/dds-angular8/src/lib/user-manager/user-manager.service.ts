@@ -66,7 +66,7 @@ export class UserManagerService {
         // TODO: Handle "org === null" here
 
         let attributes: ApplicationPolicyAttribute[] = org.projects.find(y => y.uuid == newProject.projectId).applicationPolicyAttributes;
-        let appAttributes = attributes.filter(x => x.application == this.menuProvider.getApplicationTitle());
+        let appAttributes = attributes.filter(x => x.application == this.menuProvider.getClientId());
         newProject.applicationPolicyAttributes = appAttributes;
 
         this.onProjectChange.next(newProject);
@@ -91,7 +91,7 @@ export class UserManagerService {
         resolve(true);
       else {
         let authorised = false;
-        let application = this.menuProvider.getApplicationTitle();
+        let application = this.menuProvider.getClientId();
 
         this.getUserProfile().then(
           (up) => {

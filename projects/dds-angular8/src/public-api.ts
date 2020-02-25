@@ -30,3 +30,7 @@ export {MatReadonlyDirective} from './lib/directives/mat-readonly.directive';
 
 export {ItemLinkageModule} from './lib/item-linkages/item-linkage.module';
 export {ItemLinkageService} from './lib/item-linkages/item-linkage.service';
+
+export {ControlsModule} from './lib/controls/controls.module';
+export {MatWrapperComponent} from './lib/controls/mat-wrapper/mat-wrapper.component';
+export {HelpButtonComponent} from './lib/controls/help-button/help-button.component';

@@ -148,6 +148,6 @@ export class LayoutComponent implements OnInit {
       && this.router.routerState.root.firstChild.snapshot
       && this.router.routerState.root.firstChild.snapshot.data
       && this.router.routerState.root.firstChild.snapshot.data.helpContext)
-      window.open('https://help.discoverydataservice.org/' + this.menuService.getClientId() + '/' + this.router.routerState.root.firstChild.snapshot.data.helpContext, 'Help');
+      window.open('https://help.discoverydataservice.net/Content/Apps/' + this.menuService.getClientId() + '/' + this.router.routerState.root.firstChild.snapshot.data.helpContext, 'Help');
   }
 }
