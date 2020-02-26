@@ -10,14 +10,14 @@
 </div>
 <div class="flex" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="16px grid" fxLayoutAlign="start">
 
-  <div *ngIf="allowSelect" class="toolbarCheckbox">
+  <div class="toolbarCheckbox">
 
-    <mat-checkbox class="toolbarOptions" (change)="$event ? masterToggle() : null"
+    <mat-checkbox *ngIf="items?.length > 0 && allowSelect" class="toolbarOptions" (change)="$event ? masterToggle() : null"
                   [checked]="selection.hasValue() && isAllSelected()"
                   [indeterminate]="selection.hasValue() && !isAllSelected()"
                   [aria-label]="checkboxLabel()">
     </mat-checkbox>
-    <ng-content *ngIf="selection.selected.length > 0" select="button[role=selectionOnly]"></ng-content>
+    <ng-content *ngIf="selection.selected.length > 0 && allowSelect" select="button[role=selectionOnly]"></ng-content>
     <ng-content></ng-content>
   </div>
 

@@ -1,6 +1,6 @@
 {
   "name": "dds-angular8",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "peerDependencies": {
     "@angular/common": "^8.2.9",
     "@angular/core": "^8.2.9"
