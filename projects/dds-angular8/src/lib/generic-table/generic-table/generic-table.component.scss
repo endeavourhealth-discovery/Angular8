@@ -35,3 +35,7 @@ tr.expanded-element-row:not(.expanded-row):active {
 .expanded-element-description-attribution {
   opacity: 0.5;
 }
+
+.mat-row:hover {
+  cursor: pointer;
+}
