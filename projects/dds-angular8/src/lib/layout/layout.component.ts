@@ -2,7 +2,7 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 import {AbstractMenuProvider} from './menuProvider.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {MenuOption} from './models/MenuOption';
-import {Route, Router} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {CanActivateRouteGuard} from '../security/can-activate-route.guard';
 import {UserProfile} from '../user-manager/models/UserProfile';
 import {UserProject} from '../user-manager/models/UserProject';
@@ -144,10 +144,25 @@ export class LayoutComponent implements OnInit {
     if (this.router
       && this.router.routerState
       && this.router.routerState.root
-      && this.router.routerState.root.firstChild
-      && this.router.routerState.root.firstChild.snapshot
-      && this.router.routerState.root.firstChild.snapshot.data
-      && this.router.routerState.root.firstChild.snapshot.data.helpContext)
-      window.open('https://help.discoverydataservice.net/Content/Apps/' + this.menuService.getClientId() + '/' + this.router.routerState.root.firstChild.snapshot.data.helpContext, 'Help');
+      && this.router.routerState.root.firstChild)
+      this.showHelp(this.router.routerState.root.firstChild);
+  }
+
+  showHelp(route:ActivatedRoute) {
+    if (route
+    && route.snapshot.data
+      && route.snapshot.data.helpContext) {
+
+      let helpContext: string = route.snapshot.data.helpContext;
+      route.params.subscribe(
+        (result) => {
+          for(let param in result) {
+            helpContext = helpContext.replace('${' + param + '}', result[param]);
+          }
+          window.open('https://help.discoverydataservice.net/Content/Apps/' + this.menuService.getClientId() + '/' + helpContext, 'Help');
+        },
+        (error) => this.log.error(error)
+      );
+    }
   }
 }
