@@ -121,6 +121,26 @@ export class ItemLinkageService {
     {num: 1, name: 'Secure FTP'}
   ];
 
+  public mapTypes = [
+    {num: 0, name: 'Service'},
+    {num: 1, name: 'Organisation'},
+    {num: 2, name: 'Region'},
+    {num: 3, name: 'Data Sharing Agreement'},
+    // {num: 4, name: 'Data Flow'},
+    {num: 5, name: 'Data Processing Agreement'},
+    {num: 6, name: 'Cohort'},
+    {num: 7, name: 'Data Set'},
+    {num: 8, name: 'Publisher'},
+    {num: 9, name: 'Subscriber'},
+    {num: 10, name: 'Purpose'},
+    {num: 11, name: 'Benefit'},
+    {num: 12, name: 'Document'},
+    // {num: 13, name: 'Data Exchange'},
+    {num: 14, name: 'Project'},
+    {num: 15, name: 'Extract Technical Details'},
+    {num: 16, name: 'Schedule'}
+  ];
+
   public getLinkedItem(id: number, lookupArray: string): string {
     const foundLink = this[lookupArray].find(i => i.num === id);
     if (foundLink != null) {
