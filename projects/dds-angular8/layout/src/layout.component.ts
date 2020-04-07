@@ -1,13 +1,13 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
-import {AbstractMenuProvider} from './menuProvider.service';
+import {AbstractMenuProvider} from 'dds-angular8/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import {MenuOption} from './models/MenuOption';
+import {MenuOption} from 'dds-angular8/core';
 import {ActivatedRoute, Route, Router} from '@angular/router';
-import {CanActivateRouteGuard} from '../security/can-activate-route.guard';
-import {UserProfile} from '../user-manager/models/UserProfile';
-import {UserProject} from '../user-manager/models/UserProject';
-import {UserManagerService} from '../user-manager/user-manager.service';
-import {LoggerService} from '../logger/logger.service';
+import {CanActivateRouteGuard} from 'dds-angular8/security';
+import {UserProfile} from 'dds-angular8/user-manager';
+import {UserProject} from 'dds-angular8/user-manager';
+import {UserManagerService} from 'dds-angular8/user-manager';
+import {LoggerService} from 'dds-angular8/logger';
 
 @Component({
   selector: 'app-root',

@@ -6,7 +6,7 @@ import {HttpClient, HttpEvent, HttpHandler, HttpParams, HttpRequest} from '@angu
 import {KeycloakService} from 'keycloak-angular';
 import {UserOrganisationProject} from './models/UserOrganisationProject';
 import {ApplicationPolicyAttribute} from './models/ApplicationPolicyAttribute';
-import {AbstractMenuProvider} from '../layout/menuProvider.service';
+import {AbstractMenuProvider} from 'dds-angular8/core';
 
 @Injectable()
 export class UserManagerService {

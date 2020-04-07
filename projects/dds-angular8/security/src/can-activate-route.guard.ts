@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Routes} from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 import {AccessDeniedComponent} from './access-denied/access-denied.component';
-import {UserManagerService} from '../user-manager/user-manager.service';
-import {LoggerService} from '../logger/logger.service';
+import {UserManagerService} from 'dds-angular8/user-manager';
+import {LoggerService} from 'dds-angular8/logger';
 
 @Injectable({
   providedIn: 'root'

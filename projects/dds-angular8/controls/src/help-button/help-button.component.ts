@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoggerService} from '../../logger/logger.service';
-import {AbstractMenuProvider} from '../../layout/menuProvider.service';
+import {LoggerService} from 'dds-angular8/logger';
+import {AbstractMenuProvider} from 'dds-angular8/core';
 
 @Component({
   selector: 'help-button',
