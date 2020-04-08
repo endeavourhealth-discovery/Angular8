@@ -47,7 +47,7 @@ export class MatWrapperComponent implements OnDestroy, MatFormFieldControl<any> 
     if (!this.wrapper)
       return true;
 
-    return !this.wrapper.nativeElement.innerHTML.trim();
+    return !this.wrapper.nativeElement.innerHTML.replace(/(?=<!--)([\s\S]*?)-->/g, "").trim();
   }
 
   @HostBinding('class.floating')
