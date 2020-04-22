@@ -92,7 +92,10 @@ export class ItemLinkageService {
 
   public projectTypes = [
     {num: 0, name: 'Extract'},
-    {num: 1, name: 'Query'}
+    {num: 1, name: 'Query'},
+    {num: 2, name: 'API'},
+    {num: 3, name: 'Data Assurance'},
+    {num: 4, name: 'Distribution'}
   ];
 
   public flowScheduleIds = [
