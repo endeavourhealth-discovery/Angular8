@@ -159,7 +159,7 @@ export class LayoutComponent implements OnInit {
           for(let param in result) {
             helpContext = helpContext.replace('${' + param + '}', result[param]);
           }
-          window.open('https://help.discoverydataservice.net/Content/Apps/' + this.menuService.getClientId() + '/' + helpContext, 'Help');
+          window.open('https://wiki.discoverydataservice.org/index.php?title=' + (this.menuService.getApplicationTitle().replace(' ', '_')) + '/' + helpContext, 'Help');
         },
         (error) => this.log.error(error)
       );

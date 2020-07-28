@@ -22,7 +22,7 @@ export class HelpButtonComponent implements OnInit {
   }
 
   callHelp() {
-    window.open('https://help.discoverydataservice.net/Content/Apps/' + this.menuService.getClientId() + '/' + this.context, 'Help');
+    window.open('https://wiki.discoverydataservice.org/index.php?title=' + (this.menuService.getApplicationTitle().replace(' ', '_')) + '/' +  this.context, 'Help');
   }
 
 }
