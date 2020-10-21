@@ -1,5 +1,5 @@
 
-<div class="flex" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="16px grid" fxLayoutAlign="start">
+<div class="flex" fxLayout="row wrap" fxLayout.xs="column"  fxLayoutAlign="start">
   <mat-form-field *ngIf="(totalItems > pageSize || filtered) && allowSearch" appearance="outline" fxFlex="50" fxFill>
     <mat-label>Search</mat-label>
     <input matInput [(ngModel)]="filterText" (keyup.enter)="applyFilter($event.target.value)" placeholder="Search">
@@ -8,7 +8,7 @@
     </button>
   </mat-form-field>
 </div>
-<div class="flex" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="16px grid" fxLayoutAlign="start">
+<div class="flex" fxLayout="row wrap" fxLayout.xs="column"  fxLayoutAlign="start">
 
   <div class="toolbarCheckbox">
 
