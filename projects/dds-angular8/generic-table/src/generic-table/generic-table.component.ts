@@ -66,6 +66,10 @@ export class GenericTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
 
+    this.expandedToShow = this.detailsToShow.filter(det => det.secondary);
+    this.primaryToShow = this.detailsToShow.filter(det => !det.secondary);
+    this.propertiesToShow = this.primaryToShow.map(x => x.property);
+
     this.updateRows();
     var selectIndex = this.propertiesToShow.indexOf('select');
     var actionIndex: number = this.propertiesToShow.indexOf('action');

@@ -81,6 +81,10 @@ export class GenericTableSspComponent implements OnInit, AfterViewInit, OnChange
 
     this.dataSource = new MatTableDataSource(this.items);
 
+    this.expandedToShow = this.detailsToShow.filter(det => det.secondary);
+    this.primaryToShow = this.detailsToShow.filter(det => !det.secondary);
+    this.propertiesToShow = this.primaryToShow.map(x => x.property);
+
     var selectIndex: number = this.propertiesToShow.indexOf('select');
     var actionIndex: number = this.propertiesToShow.indexOf('action');
 
