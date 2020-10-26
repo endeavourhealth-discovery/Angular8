@@ -39,3 +39,7 @@ tr.expanded-element-row:not(.expanded-row):active {
 .mat-row:hover {
   cursor: pointer;
 }
+
+.mat-cell {
+  padding: 2px 2px 2px 2px;
+}
