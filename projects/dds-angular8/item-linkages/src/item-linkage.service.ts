@@ -95,7 +95,10 @@ export class ItemLinkageService {
     {num: 1, name: 'Query'},
     {num: 2, name: 'API'},
     {num: 3, name: 'Data Assurance'},
-    {num: 4, name: 'Distribution'}
+    {num: 4, name: 'Distribution'},
+    {num: 5, name: 'Query – view down to practice level'},
+    {num: 6, name: 'Query – view down to CCG/Borough level'},
+    {num: 7, name: 'Query – view down to STP level'}
   ];
 
   public flowScheduleIds = [
