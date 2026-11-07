@@ -137,9 +137,9 @@ export class UserManagerService {
   private loadUserProfile(): Observable<UserProfile> {
     const vm = this;
     let params = new HttpParams();
-    params = params.append('userId', this._keycloakUserId);
+    // params = params.append('userId', this._keycloakUserId);
     return vm.http
-      .get<UserProfile>('api/userManager/getUserProfile', {params: params});
+      .get<UserProfile>('api/userManager/getCurrentUserProfile', {params: params});
   }
 
   private loadUserProjects(): Observable<UserProject[]> {
